@@ -7,6 +7,12 @@
 <body>
     <h2>reviewapp!!</h2>
 
+    <!-- 메뉴바 -->
+    <nav>
+        <a th:href="@{/item/type/BOOK}" th:classappend="${selectedType == 'BOOK'} ? 'active'">도서</a> |
+        <a th:href="@{/item/type/MOVIE}" th:classappend="${selectedType == 'MOVIE'} ? 'active'">영화</a>
+    </nav>
+
     <!-- 로그인이 안 된 경우 -->
     <div th:if="${session.loginEmail == null}">
         <a href="/member/save">회원가입</a>
@@ -19,8 +25,30 @@
         <a href="/member/logout">로그아웃</a>
     </div>
 
-    <!-- 일단 보류 -->
-    <a href="/member/">회원목록</a>
+    <!-- 아이템 목록 출력 (itemsList 있을 때만 보임) -->
+    <div th:if="${itemsList != null}">
+        <h3>목록</h3>
+        <table>
+            <tr>
+                <th>title</th>
+                <th>image</th>
+                <th>상세조회</th>
+            </tr>
+            <tr th:each="item : ${itemsList}">
+                <td th:text="${item.title}"></td>
+                <td>
+                    <img th:src="@{${item.imageUrl}}" alt="아이템 이미지" width="100">
+                </td>
+                <td>
+                    <a th:href="@{|/item/id/${item.id}|}">조회</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--
+        <a href="/member/">회원목록</a>
+        -->
 
 </body>
 </html>

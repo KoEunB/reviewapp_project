@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>itemdetail</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>이미지</th>
+        <th>title</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>
+            <img th:src="@{${item.imageUrl}}" alt="아이템 이미지" width="100">
+        </td>
+        <td th:text="${item.title}"></td>
+        <td th:text="${item.description}"></td>
+    </tr>
+</table>
+</body>
+</html>
