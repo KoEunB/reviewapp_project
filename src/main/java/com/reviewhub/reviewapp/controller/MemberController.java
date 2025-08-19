@@ -54,14 +54,14 @@ public class MemberController {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // 어떠한 html로 가져갈 데이터가 있다면 model 사용
         model.addAttribute("memberList", memberDTOList);
-        return "list";
+        return "userlist";
     }
 
     @GetMapping("/member/{id}")
     public String findById(@PathVariable Long id, Model model) {
         MemberDTO memberDTO = memberService.findById(id);
         model.addAttribute("member", memberDTO);
-        return "detail";
+        return "userdetail";
     }
 
     @GetMapping("/member/update")
