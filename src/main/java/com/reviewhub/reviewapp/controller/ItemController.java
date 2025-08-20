@@ -17,7 +17,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/item/type/{type}")
-    public String getItemByType(@PathVariable("type") String type, Model model) {
+    public String getItemByType(@PathVariable String type, Model model) {
         List<ItemDTO> itemDTOList = itemService.findByType(type.toUpperCase());
         model.addAttribute("itemsList", itemDTOList);
         model.addAttribute("selectedType", type);

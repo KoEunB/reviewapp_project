@@ -8,17 +8,48 @@
 <body>
 <table>
     <tr>
-        <th>이미지</th>
-        <th>title</th>
-        <th>description</th>
-    </tr>
-    <tr>
+        <th>image</th>
         <td>
             <img th:src="@{${item.imageUrl}}" alt="아이템 이미지" width="100">
         </td>
+        </tr>
+    <tr>
+        <th>title</th>
         <td th:text="${item.title}"></td>
+        </tr>
+    <tr>
+        <th>description</th>
         <td th:text="${item.description}"></td>
     </tr>
+
+    <!-- 도서일 경우 -->
+    <tr th:if="${item.type == 'BOOK'}">
+        <th>Author</th>
+        <td th:text="${item.author}" colspan="2"></td>
+    </tr>
+    <tr th:if="${item.type == 'BOOK'}">
+        <th>Publisher</th>
+        <td th:text="${item.publisher}" colspan="2"></td>
+    </tr>
+    <tr th:if="${item.type == 'BOOK'}">
+        <th>Publish Date</th>
+        <td th:text="${item.publishDate}" colspan="2"></td>
+    </tr>
+
+    <!-- 영화일 경우 -->
+    <tr th:if="${item.type == 'MOVIE'}">
+        <th>Director</th>
+        <td th:text="${item.director}" colspan="2"></td>
+    </tr>
+    <tr th:if="${item.type == 'MOVIE'}">
+        <th>Actors</th>
+        <td th:text="${item.actors}" colspan="2"></td>
+    </tr>
+    <tr th:if="${item.type == 'MOVIE'}">
+        <th>Release Date</th>
+        <td th:text="${item.releaseDate}" colspan="2"></td>
+    </tr>
+
 </table>
 </body>
 </html>
