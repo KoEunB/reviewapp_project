@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+</head>
+<body>
+<h2>마이페이지</h2>
+<table>
+  <tr>
+    <th>회원번호</th>
+    <td th:text="${member.id}"></td>
+  </tr>
+  <tr>
+    <th>아이디(email)</th>
+    <td th:text="${member.email}"></td>
+  </tr>
+  <tr>
+    <th>이름/닉네임</th>
+    <td th:text="${member.username}"></td>
+  </tr>
+</table>
+
+<div class="link-group">
+  <a th:href="@{/member/update}">회원정보 수정</a>
+  <a th:href="@{/member/logout}">로그아웃</a>
+  <a th:href="@{/}">홈으로</a>
+</div>
+</body>
+</html>

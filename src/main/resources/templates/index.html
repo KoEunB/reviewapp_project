@@ -22,10 +22,10 @@
     <!-- 로그인이 된 경우 -->
     <div th:if="${session.loginEmail != null}">
         <span th:text="${session.loginEmail} + ' 님 환영합니다!'"></span>
+        <a th:if="${session.loginId != null}" th:href="@{/member/{id}(id=${session.loginId})}">마이페이지</a>
         <a href="/member/logout">로그아웃</a>
     </div>
 
-    <!-- 아이템 목록 출력 (itemsList 있을 때만 보임) -->
     <div th:if="${itemsList != null}">
         <h3>목록</h3>
         <table>
@@ -45,10 +45,6 @@
             </tr>
         </table>
     </div>
-
-    <!--
-        <a href="/member/">회원목록</a>
-        -->
 
 </body>
 </html>

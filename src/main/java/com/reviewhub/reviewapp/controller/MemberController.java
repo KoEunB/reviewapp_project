@@ -41,7 +41,8 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getEmail());
-            return "redirect:/";
+            session.setAttribute("loginId", loginResult.getId());
+            return "redirect:/member/" + loginResult.getId();
         } else {
             // login 실패
             model.addAttribute("loginError", "이메일 또는 비밀번호가 올바르지 않습니다.");
@@ -49,19 +50,16 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/member/")
-    public String findAll(Model model) {
-        List<MemberDTO> memberDTOList = memberService.findAll();
-        // 어떠한 html로 가져갈 데이터가 있다면 model 사용
-        model.addAttribute("memberList", memberDTOList);
-        return "userlist";
-    }
-
     @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        MemberDTO memberDTO = memberService.findById(id);
+    public String mypage(@PathVariable Long id, HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.updateForm(loginEmail); //이메일로 회원 조회
+        // URL의 {id}와 세션의 회원이 일치하지 않으면 접근 차단
+        if (!memberDTO.getId().equals(id)) {
+            return "redirect:/";
+        }
         model.addAttribute("member", memberDTO);
-        return "userdetail";
+        return "mypage";
     }
 
     @GetMapping("/member/update")
