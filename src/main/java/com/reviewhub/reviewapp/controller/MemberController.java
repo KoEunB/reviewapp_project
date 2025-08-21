@@ -1,18 +1,23 @@
 package com.reviewhub.reviewapp.controller;
 
 import com.reviewhub.reviewapp.dto.MemberDTO;
+import com.reviewhub.reviewapp.entity.ReviewEntity;
 import com.reviewhub.reviewapp.service.MemberService;
+import com.reviewhub.reviewapp.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
     //생성자 주입
     private final MemberService memberService;
+    private final ReviewService reviewService;
 
     //회원가입 페이지 출력 요청
     @GetMapping("/member/save")
@@ -57,6 +62,11 @@ public class MemberController {
             return "redirect:/";
         }
         model.addAttribute("member", memberDTO);
+
+        //자신이 쓴 리뷰 목록
+        List<ReviewEntity> reviewEntities = reviewService.findByReviewerId(memberDTO.getId());
+        model.addAttribute("reviews", reviewEntities);
+
         return "mypage";
     }
 

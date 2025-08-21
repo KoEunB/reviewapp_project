@@ -26,5 +26,32 @@
   <a th:href="@{/member/logout}">로그아웃</a>
   <a th:href="@{/}">홈으로</a>
 </div>
+
+<div>
+  <h3>내가 작성한 리뷰 목록</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>제목</th>
+      <th>내용</th>
+      <th>평점</th>
+      <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+      <td th:text="${review.item.title}"></td>
+      <td th:text="${review.contents}"></td>
+      <td th:text="${review.rating}"></td>
+      <td th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+      <td>
+        <a th:if="${session.loginId == review.reviewer.id}"
+           th:href="@{|/review/update/${review.id}|}">수정</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>

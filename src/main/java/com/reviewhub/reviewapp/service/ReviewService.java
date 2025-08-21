@@ -58,4 +58,8 @@ public class ReviewService {
 
         reviewRepository.save(ReviewEntity.toUpdateReviewEntity(reviewDTO, member, item));
     }
+
+    public List<ReviewEntity> findByReviewerId(Long reviewerId) {
+        return reviewRepository.findByReviewerId(reviewerId);
+    }
 }
