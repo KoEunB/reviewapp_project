@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -19,7 +17,7 @@ public class MemberController {
     //회원가입 페이지 출력 요청
     @GetMapping("/member/save")
     public String saveForm() {
-        return "save";
+        return "usersave";
     }
 
     @PostMapping("/member/save")
@@ -67,7 +65,7 @@ public class MemberController {
         String myEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         model.addAttribute("updateMember", memberDTO);
-        return "update";
+        return "userupdate";
     }
 
     @PostMapping("/member/update")
