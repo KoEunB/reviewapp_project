@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +20,14 @@ public class ReviewController {
     private final ItemRepository itemRepository;
 
     @GetMapping("/write/{itemId}")
-    public String saveForm(@PathVariable Long itemId, Model model) {
+    public String saveForm(@PathVariable Long itemId, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        //로그인 되어 있는지 확인
+        Long memberId = (Long) session.getAttribute("loginId");
+        if (memberId == null) {
+            redirectAttributes.addFlashAttribute("error", "리뷰 작성은 로그인 후 이용할 수 있습니다.");
+            return "redirect:/member/login";
+        }
+
         //DB에서 해당 아이템 조회
         ItemEntity item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("아이템 없음"));
