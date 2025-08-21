@@ -8,8 +8,8 @@
     <form action="/review/save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="itemId" th:value="${reviewDTO.itemId}" />
     title: <input th:value="${reviewDTO.itemName}" name="itemName" readonly></input>
-    contents: <textarea name="contents" cols="30" rows="10"></textarea> <br>
-    rating: <input type="number" name="rating" min="1" max="5"></input>
+    contents: <textarea name="contents" cols="30" rows="10" required></textarea> <br>
+    rating: <input type="number" name="rating" min="1" max="5" required></input>
     <input type="submit" value="리뷰작성">
 </form>
 </body>
