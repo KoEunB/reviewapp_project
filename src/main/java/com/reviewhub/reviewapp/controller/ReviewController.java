@@ -82,4 +82,14 @@ public class ReviewController {
 
         return "redirect:/item/id/" + reviewDTO.getItemId();
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id, HttpSession session) {
+        Long memberId = (Long) session.getAttribute("loginId");
+        if (memberId == null) {
+            return "redirect:/member/login";
+        }
+        reviewService.deleteById(id);
+        return "redirect:/member/" + memberId;
+    }
 }

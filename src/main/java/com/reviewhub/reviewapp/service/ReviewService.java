@@ -62,4 +62,8 @@ public class ReviewService {
     public List<ReviewEntity> findByReviewerId(Long reviewerId) {
         return reviewRepository.findByReviewerId(reviewerId);
     }
+
+    public void deleteById(Long id) {
+        reviewRepository.deleteById(id);
+    }
 }

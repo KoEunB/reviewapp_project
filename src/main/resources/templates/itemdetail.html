@@ -76,6 +76,10 @@
                 <a th:if="${session.loginId == review.reviewer.id}"
                    th:href="@{|/review/update/${review.id}|}">수정</a>
             </td>
+            <td>
+                <a th:if="${session.loginId == review.reviewer.id}"
+                   th:href="@{|/review/delete/${review.id}|}">삭제</a>
+            </td>
         </tr>
         </tbody>
     </table>
